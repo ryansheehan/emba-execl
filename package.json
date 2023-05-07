@@ -39,7 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@auth/core": "^0.7.1",
+		"@auth0/auth0-spa-js": "^2.0.4",
 		"open-props": "^1.5.8"
 	}
 }
