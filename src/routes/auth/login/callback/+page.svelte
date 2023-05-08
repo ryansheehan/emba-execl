@@ -8,4 +8,4 @@
     handleCallback();
 </script>
 
-<a href="/">Home</a>
+<a href="/" data-sveltekit-preload-data="tap">Home</a>
