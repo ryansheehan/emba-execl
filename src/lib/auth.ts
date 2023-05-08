@@ -21,7 +21,7 @@ if(browser) {
             domain: import.meta.env.AUTH0_DOMAIN,
             clientId: import.meta.env.AUTH0_CLIENT_ID,
             authorizationParams: {
-                redirect_uri: import.meta.env.AUTH0_REDIRECT_URI,        
+                redirect_uri: `${location.origin}/auth/login/callback`,        
             },
         }); 
     
@@ -34,7 +34,7 @@ if(browser) {
             console.log('logout called');emptyFn
             await auth0.logout({
                 logoutParams: {
-                    returnTo: import.meta.env.AUTH0_LOGOUT_URI,
+                    returnTo: `${location.origin}`,
                 }
             });
             user_internal.set(await auth0.getUser());
