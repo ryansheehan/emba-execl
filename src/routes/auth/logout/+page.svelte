@@ -1,9 +1,7 @@
 <script lang="ts">
-    import {logout} from '$lib/auth';
-
+    import {logout} from '$lib/auth/client';
+        
     export const ssr = false;
-
+    
     logout();
 </script>
-
-<p>You have been logged out.</p>

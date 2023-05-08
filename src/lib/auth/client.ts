@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import {writable, readonly, get} from 'svelte/store';
 import {createAuth0Client, type Auth0Client, type User} from '@auth0/auth0-spa-js';
 import { goto } from '$app/navigation';
+
 export { type User } from '@auth0/auth0-spa-js';
 
 const user_internal = writable<User | undefined>(undefined);
@@ -25,30 +26,32 @@ if(browser) {
             },
         }); 
     
-        login = () => {
-            console.log('login called');
+        login = () => {            
             return auth0.loginWithRedirect();
         };
     
-        logout = async () => {
-            console.log('logout called');emptyFn
+        logout = async () => {            
             await auth0.logout({
                 logoutParams: {
                     returnTo: `${location.origin}`,
                 }
             });
-            user_internal.set(await auth0.getUser());
             isAuthenticated_internal.set(await auth0.isAuthenticated());
+            user_internal.set(await auth0.getUser());
+                       
+            goto('/');
         }
     
         handleCallback = async () => {
-            console.log('handleCallback called');
+            console.log('starting callback');
             const res = await auth0.handleRedirectCallback();  
-            console.log(res);
-            user_internal.set(await auth0.getUser());
+            console.log('callback res', res);
+            const token = await auth0.getTokenSilently();    
+            console.log('setting access_token', token);        
+            
+            user_internal.set(await auth0.getUser());            
             isAuthenticated_internal.set(await auth0.isAuthenticated());   
-            goto('/');
-            console.log('finished callback', get(user));
+            goto('/');         
         }
     })(); 
 }

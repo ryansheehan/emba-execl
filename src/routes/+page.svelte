@@ -1,9 +1,13 @@
 <script lang="ts">	
-    import { user } from '$lib/auth';
+    import { user } from '$lib/auth/client';
 
     const userData = $user ?? {};
     console.log('user', userData);
     const printedUserData = JSON.stringify(userData, undefined, 2);
+
+    export let data;
+
+    console.log(data);
 </script>
 
 <h1>Welcome to SvelteKit</h1>
