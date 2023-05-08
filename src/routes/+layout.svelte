@@ -1,6 +1,13 @@
 <script lang="ts">
     import '../app.postcss'
+    import {dev} from '$app/environment';
 </script>
+
+<svelte:head>
+    {#if dev}
+        <meta name="referrer" content="no-referrer-when-downgrade"/>
+    {/if}
+</svelte:head>
 
 <div>
     <slot/>

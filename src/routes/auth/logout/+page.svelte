@@ -1,7 +1,3 @@
-<script lang="ts">
-    import {logout} from '$lib/auth/client';
-        
+<script lang="ts">   
     export const ssr = false;
-    
-    logout();
 </script>
