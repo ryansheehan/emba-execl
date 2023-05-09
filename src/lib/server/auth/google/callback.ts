@@ -13,9 +13,8 @@ export async function handleCallback({url, cookies}: CallbackParams) {
         const google = getClient();
         const {tokens} = await google.getToken(authCode);
         
-        const {id_token, access_token} = tokens;
-        console.log(access_token);
-
+        const {id_token} = tokens;
+        
         cookies.set('token', id_token!, {httpOnly: true, sameSite: 'lax', secure: !dev, path: '/'});
     } else {
         const responseError = url.searchParams.get('error');
