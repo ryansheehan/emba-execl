@@ -41,7 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"@auth0/auth0-spa-js": "^2.0.4",
-		"jsonwebtoken": "^9.0.0",
+		"google-auth-library": "^8.8.0",
 		"open-props": "^1.5.8"
 	}
 }

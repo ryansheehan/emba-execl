@@ -5,7 +5,7 @@ declare global {
 		// interface Error {}
 		
 		interface Locals {
-			jwt: any;
+			userId: string;
 		}
 
 		interface PageData {

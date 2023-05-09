@@ -1,3 +1,5 @@
-<script lang="ts">   
-    export const ssr = false;
+<script lang="ts">
+    import {goto} from '$app/navigation';
+
+    goto('/');
 </script>

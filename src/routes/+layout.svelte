@@ -17,6 +17,10 @@
     /**/
 
     div {
-        min-block-size: 100vh;        
+        min-block-size: 100vh;      
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;        
+        padding-top: var(--size-4);
     }
 </style>

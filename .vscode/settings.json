@@ -13,4 +13,7 @@
       "cssvar.extensions": [
         "svelte", "css", "postcss", "jsx", "tsx"
       ],
+      "cSpell.words": [
+        "gifs"
+      ],
 }

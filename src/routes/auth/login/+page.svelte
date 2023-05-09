@@ -1,5 +1,33 @@
-<script lang="ts">     
-    
+<script lang="ts">   
+     
 </script>
 
-<a href="/login" data-sveltekit-preload-data="tap">Login with Google</a>
+<svelte:head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</svelte:head>
+
+<div class="login-options">
+    <div id="g_id_onload"
+        data-client_id="{import.meta.env.GOOG_CLIENT_ID}"
+        data-context="signin"
+        data-ux_mode="redirect"
+        data-login_uri="{import.meta.env.APP_BASE_URI}/auth/login"
+        data-nonce=""
+        data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left">
+    </div>
+</div>
+
+<style lang="postcss">
+    .login-options {
+        align-self: center;
+    }
+</style>

@@ -2,6 +2,8 @@ import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
+const isProduction = process.env.NODE_ENV==='production';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -19,7 +21,27 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
 			runtime: 'nodejs18.x',
-		})
+		}),
+
+		csrf: isProduction,
+
+		// csp: {			
+		// 	reportOnly: {
+		// 		'report-to': [],
+		// 		'connect-src': [
+		// 			'https://accounts.google.com/gsi/',					
+		// 		],
+		// 		'frame-src': [
+		// 			'https://accounts.google.com/gsi/',
+		// 		],
+		// 		'script-src': [
+		// 			'https://accounts.google.com/gsi/client',
+		// 		],
+		// 		'style-src': [
+		// 			'https://accounts.google.com/gsi/style'
+		// 		],
+		// 	}
+		// }
 	}
 };
 
