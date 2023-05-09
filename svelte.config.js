@@ -23,7 +23,7 @@ const config = {
 			runtime: 'nodejs18.x',
 		}),
 
-		csrf: isProduction,
+		csrf: {checkOrigin: isProduction},
 
 		// csp: {			
 		// 	reportOnly: {
