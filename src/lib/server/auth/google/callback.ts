@@ -12,10 +12,10 @@ export async function handleCallback({url, cookies}: CallbackParams) {
     if(authCode) {
         const google = getClient();
         const {tokens} = await google.getToken(authCode);
+        const {id_token, expiry_date} = tokens;
         
-        const {id_token} = tokens;
         
-        cookies.set('token', id_token!, {httpOnly: true, sameSite: 'lax', secure: !dev, path: '/'});
+        cookies.set('token', id_token!, {httpOnly: true, sameSite: 'lax', secure: !dev, path: '/', expires: new Date(expiry_date!)});
     } else {
         const responseError = url.searchParams.get('error');
         throw responseError; // todo: go somewhere on error
