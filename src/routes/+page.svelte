@@ -1,11 +1,13 @@
 <script lang="ts">	
+    import type { PageData } from './$types';
+    export let data: PageData;
 
+    const {user} = data;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<a href="/auth/login" data-sveltekit-preload-data="tap">Login</a>
-<a href="/auth/logout" data-sveltekit-preload-data="tap">Logout</a>
-
-
+{#if (user)}
+    <p>Hello {user.given_name}</p>
+    <a href="/auth/logout" data-sveltekit-preload-data="tap">Logout</a>
+{:else}
+    <a href="/auth/login" data-sveltekit-preload-data="tap">Login</a>
+{/if}

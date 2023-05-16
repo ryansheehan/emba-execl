@@ -9,12 +9,13 @@ export const auth: Handle = async ({event, resolve}) => {
         try {
             const google = getClient();
             const ticket = await google.verifyIdToken({idToken, audience: [clientId]});
-            const {sub: userId} = ticket.getPayload() ?? {};
-            if (userId) {
-                locals.userId = userId;
+            const {sub: id, email = '', name = '', picture = '', given_name = '', family_name = ''} = ticket.getPayload() ?? {};
+            if (id) {
+                const user = {id, email, name, picture, given_name, family_name};
+                locals.user = user;
             }
-        } catch (error) {
-            console.error('uh oh', error);       
+        } catch (error) {                                    
+            handleLogout(event);
         }
     }
 
