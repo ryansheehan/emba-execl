@@ -5,13 +5,7 @@ export interface LogoutParams {
 }
 
 export function handleLogout({cookies}: LogoutParams) {
-    console.log('handle logout');
-
-    if(cookies.get('token')) {
-        console.log('token found');
-        console.log('deleting token');
+   if(cookies.get('token')) {
         cookies.delete('token', {path: '/'});
-    } else {
-        console.log('token not found');
     }
 }
