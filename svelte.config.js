@@ -4,6 +4,14 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 
 const isProduction = process.env.NODE_ENV==='production';
 
+const baseCsp = [
+	'self',
+	'https://www.gstatic.com/recaptcha/', // recaptcha
+	'https://accounts.google.com/gsi/', // sign-in w/google
+	'https://www.google.com/recaptcha/', // recapatcha
+	'https://fonts.gstatic.com/' // recaptcha fonts
+]
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -25,23 +33,17 @@ const config = {
 
 		csrf: {checkOrigin: isProduction},
 
-		// csp: {			
-		// 	reportOnly: {
-		// 		'report-to': [],
-		// 		'connect-src': [
-		// 			'https://accounts.google.com/gsi/',					
-		// 		],
-		// 		'frame-src': [
-		// 			'https://accounts.google.com/gsi/',
-		// 		],
-		// 		'script-src': [
-		// 			'https://accounts.google.com/gsi/client',
-		// 		],
-		// 		'style-src': [
-		// 			'https://accounts.google.com/gsi/style'
-		// 		],
-		// 	}
-		// }
+		csp: {
+			mode: 'auto',
+			directives: {
+				'default-src': [...baseCsp],
+				'script-src': ['unsafe-inline', ...baseCsp],
+				'img-src': ['data:', 'blob:', ...baseCsp],
+				'style-src': ['unsafe-inline', ...baseCsp],
+				'object-src': ['none'],
+				'base-uri': ['self']
+			}
+		},
 	}
 };
 
