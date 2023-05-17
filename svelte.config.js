@@ -31,19 +31,19 @@ const config = {
 			runtime: 'nodejs18.x',
 		}),
 
-		csrf: {checkOrigin: isProduction},
+		csrf: {checkOrigin: false},
 
-		csp: {
-			mode: 'auto',
-			directives: {
-				'default-src': [...baseCsp],
-				'script-src': ['unsafe-inline', ...baseCsp],
-				'img-src': ['data:', 'blob:', ...baseCsp],
-				'style-src': ['unsafe-inline', ...baseCsp],
-				'object-src': ['none'],
-				'base-uri': ['self']
-			}
-		},
+		// csp: {
+		// 	mode: 'auto',
+		// 	directives: {
+		// 		'default-src': [...baseCsp],
+		// 		'script-src': ['unsafe-inline', ...baseCsp],
+		// 		'img-src': ['data:', 'blob:', ...baseCsp],
+		// 		'style-src': ['unsafe-inline', ...baseCsp],
+		// 		'object-src': ['none'],
+		// 		'base-uri': ['self']
+		// 	}
+		// },
 	}
 };
 
