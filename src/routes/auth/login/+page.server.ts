@@ -2,12 +2,12 @@ import { type Actions, redirect } from '@sveltejs/kit';
 import {googleLogin} from '$lib/server/auth/google/login';
 import type { PageServerLoadEvent } from './$types';
 
-export async function load({cookies}: PageServerLoadEvent) {    
-    if (cookies.get('token')) {        
+export async function load({locals, url}: PageServerLoadEvent) {    
+    if (locals?.user?.id) {        
         throw redirect (303, '/');
     }
 
-    return {};
+    return { };
 }
 
 export const actions: Actions = {

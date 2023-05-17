@@ -1,5 +1,9 @@
 <script lang="ts">   
-     
+    import {page} from '$app/stores';
+
+    const callbackRedirectUri = $page.url.searchParams.get('redirect');
+    const queryParam = `?redirect=${callbackRedirectUri}`;    
+    const dataLoginUri = `${import.meta.env.APP_BASE_URI}/auth/login${queryParam}`;
 </script>
 
 <svelte:head>
@@ -11,7 +15,7 @@
         data-client_id="{import.meta.env.GOOG_CLIENT_ID}"
         data-context="signin"
         data-ux_mode="redirect"
-        data-login_uri="{import.meta.env.APP_BASE_URI}/auth/login"
+        data-login_uri="{dataLoginUri}"
         data-nonce=""
         data-auto_prompt="false">
     </div>

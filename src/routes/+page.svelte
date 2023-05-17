@@ -11,3 +11,8 @@
 {:else}
     <a href="/auth/login" data-sveltekit-preload-data="tap">Login</a>
 {/if}
+
+<div>
+    <a href="/unprotected">Unprotected</a>
+    <a href="/protected">Protected</a>
+</div>

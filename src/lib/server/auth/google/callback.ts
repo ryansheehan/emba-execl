@@ -8,6 +8,7 @@ export interface CallbackParams {
 }
 
 export async function handleCallback({url, cookies}: CallbackParams) {
+    
     const authCode = url.searchParams.get('code');
     if(authCode) {
         const google = getClient();

@@ -1,7 +1,7 @@
 import { type Action, redirect } from '@sveltejs/kit';
-import {getClient, clientId} from './client';
+import {getClient, clientId, redirectUri} from './client';
 
-export const googleLogin: Action = async ({request, cookies}) => {
+export const googleLogin: Action = async ({request, cookies, url}) => {
     const data = await request.formData();
     // const clientId = data.get('client_id')! as string;
     const credential = data.get('credential')! as string;
@@ -21,13 +21,16 @@ export const googleLogin: Action = async ({request, cookies}) => {
     });
 
     const {sub} = ticket.getPayload() ?? {}; 
-    if(sub) {   
+    if(sub) {                  
+        const redirectQuery = url.searchParams.get('redirect');
+        const state = redirectQuery ? Buffer.from(redirectQuery, 'utf8').toString('base64') : undefined;
         const scopes = ['openid', 'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'];
         const authorizationUrl = google.generateAuthUrl({
             access_type: 'offline',
             scope: scopes,
-            include_granted_scopes: true,
-        });            
+            include_granted_scopes: true,     
+            state,
+        });                  
         throw redirect(303, authorizationUrl);
     }
     
