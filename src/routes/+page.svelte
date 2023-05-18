@@ -6,7 +6,7 @@
 </script>
 
 {#if (user)}
-    <p>Hello {user.given_name}</p>
+    <p>Hello {user.name}</p>
     <a href="/auth/logout" data-sveltekit-preload-data="tap">Logout</a>
 {:else}
     <a href="/auth/login" data-sveltekit-preload-data="tap">Login</a>

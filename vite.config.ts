@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [sveltekit()],
-	envPrefix: ['VITE', 'APP', 'GOOG'],
+	envPrefix: ['VITE', 'APP', 'GOOG', 'POSTGRES'],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}

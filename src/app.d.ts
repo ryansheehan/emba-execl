@@ -1,18 +1,14 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { Profile } from "@prisma/client";
+
 // for information about these interfaces
 declare global {
 	namespace App {
 		// interface Error {}
 		
 		interface Locals {
-			user: {
-				id: string;
-				email: string;
-				name: string;
-				picture: string;
-				given_name: string;
-				family_name: string;
-			}
+			user: Profile
 		}
 
 		interface PageData {

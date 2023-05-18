@@ -1,6 +1,7 @@
 import type { Cookies } from '@sveltejs/kit';
-import { getClient } from '$lib/server/auth/google/client';
+import { getClient, parseToken } from '$lib/server/auth/google/client';
 import {dev} from '$app/environment';
+import {tryCreateUser} from '$lib/server/prisma/create-user';
 
 export interface CallbackParams {
     url: URL,
@@ -14,9 +15,14 @@ export async function handleCallback({url, cookies}: CallbackParams) {
         const google = getClient();
         const {tokens} = await google.getToken(authCode);
         const {id_token, expiry_date} = tokens;
-        
-        
+
         cookies.set('token', id_token!, {httpOnly: true, sameSite: 'lax', secure: !dev, path: '/', expires: new Date(expiry_date!)});
+
+        const userInfo = await parseToken(id_token!);
+        await tryCreateUser({
+            ...userInfo,
+            provider: 'google'
+        });
     } else {
         const responseError = url.searchParams.get('error');
         throw responseError; // todo: go somewhere on error

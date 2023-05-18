@@ -1,5 +1,5 @@
 import { type Action, redirect } from '@sveltejs/kit';
-import {getClient, clientId, redirectUri} from './client';
+import {getClient, parseToken} from './client';
 
 export const googleLogin: Action = async ({request, cookies, url}) => {
     const data = await request.formData();
@@ -14,13 +14,8 @@ export const googleLogin: Action = async ({request, cookies, url}) => {
     }
 
     // validate ID token        
-    const google = getClient();
-    const ticket = await google.verifyIdToken({
-        idToken: credential,
-        audience: [clientId],
-    });
-
-    const {sub} = ticket.getPayload() ?? {}; 
+    const google = getClient();     
+    const {sub} = await parseToken(credential);
     if(sub) {                  
         const redirectQuery = url.searchParams.get('redirect');
         const state = redirectQuery ? Buffer.from(redirectQuery, 'utf8').toString('base64') : undefined;

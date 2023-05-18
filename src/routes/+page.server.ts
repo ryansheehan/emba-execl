@@ -4,19 +4,23 @@ interface ResponseData {
     user?: {
         email: string;
 		name: string;
-		picture: string;
-		given_name: string;
-		family_name: string;
+		picture?: string | null;				
     }
 }
 
-export const load = async ({locals}: PageServerLoadEvent) => {
-    const {user} = locals;
-    const {id = '', ...userData} = user ?? {};
+export const load = async ({locals}: PageServerLoadEvent): Promise<ResponseData> => {
+    const {user: userProfile} = locals;
 
-    const data:ResponseData = {        
-        user: userData.email ? userData : undefined
-    };
+    if (userProfile) {
+
+        const {email, givenName, picture} = userProfile;
     
-    return data;
+        return {        
+            user: {email, name: givenName, picture}
+        };
+    } else {
+        return {
+            user: undefined
+        }
+    }
  };
