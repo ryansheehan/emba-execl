@@ -17,17 +17,22 @@
 		"prisma": "prisma"
 	},
 	"devDependencies": {
+		"@auth0/auth0-spa-js": "^2.0.4",
 		"@playwright/test": "^1.33.0",
+		"@prisma/client": "^4.14.1",
 		"@sveltejs/adapter-auto": "^2.0.1",
 		"@sveltejs/adapter-vercel": "^2.4.3",
 		"@sveltejs/kit": "^1.16.3",
 		"@types/jsonwebtoken": "^9.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.59.6",
 		"@typescript-eslint/parser": "^5.59.6",
+		"@vercel/postgres": "^0.3.0",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.40.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte": "^2.28.0",
+		"google-auth-library": "^8.8.0",
+		"open-props": "^1.5.8",
 		"postcss": "^8.4.23",
 		"postcss-jit-props": "^1.0.13",
 		"postcss-load-config": "^4.0.1",
@@ -43,12 +48,5 @@
 		"vite": "^4.3.7",
 		"vitest": "^0.31.0"
 	},
-	"type": "module",
-	"dependencies": {
-		"@auth0/auth0-spa-js": "^2.0.4",
-		"@prisma/client": "^4.14.1",
-		"@vercel/postgres": "^0.3.0",
-		"google-auth-library": "^8.8.0",
-		"open-props": "^1.5.8"
-	}
+	"type": "module"
 }
