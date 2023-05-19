@@ -10,17 +10,27 @@
     {/if}
 </svelte:head>
 
-<div>
+<div class="root">
     <TopBar />
-    <slot/>
+    <div class="root-content">
+        <slot/>
+    </div>
 </div>
 
 <style lang="postcss">
     /**/
 
-    div {        
+    .root {       
+        min-block-size: 100vh;         
+        display: flex;        
+        flex-flow: column nowrap;
+        justify-content: flex-start; 
+        align-items: stretch;               
+    }
+
+    .root-content {
+        flex: 1;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: flex-start;                
     }
 </style>

@@ -4,6 +4,7 @@ import type { Profile } from "@prisma/client";
 
 // for information about these interfaces
 declare global {
+	const google: any;
 	namespace App {
 		// interface Error {}
 		
