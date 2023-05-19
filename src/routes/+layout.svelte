@@ -1,6 +1,7 @@
 <script lang="ts">
     import '../app.postcss'
     import {dev} from '$app/environment';
+    import TopBar from '$lib/components/top-bar.svelte';
 </script>
 
 <svelte:head>
@@ -10,17 +11,16 @@
 </svelte:head>
 
 <div>
+    <TopBar />
     <slot/>
 </div>
 
 <style lang="postcss">
     /**/
 
-    div {
-        min-block-size: 100vh;      
+    div {        
         display: flex;
         flex-flow: column nowrap;
-        justify-content: flex-start;        
-        padding-top: var(--size-4);
+        justify-content: flex-start;                
     }
 </style>

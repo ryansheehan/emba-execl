@@ -1,4 +1,6 @@
 import { OAuth2Client } from 'google-auth-library';
+
+// @ts-ignore
 import {GOOG_CLIENT_SECRET} from '$env/static/private';
 
 export const redirectUri = `${import.meta.env.APP_BASE_URI}/auth/login/callback`;
