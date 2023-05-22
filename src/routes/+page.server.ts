@@ -1,5 +1,6 @@
 import type { PageServerLoadEvent } from './$types';
-import {redirect} from '@sveltejs/kit';
+import {redirect, type Actions } from '@sveltejs/kit';
+import {todoActions} from '$lib/server/todos';
 
 interface ResponseData {
     user?: {
@@ -26,3 +27,7 @@ export const load = async ({locals}: PageServerLoadEvent): Promise<ResponseData>
         throw redirect(303, 'auth/login');
     }
  };
+
+ export const actions: Actions = {
+    ...todoActions,
+ }

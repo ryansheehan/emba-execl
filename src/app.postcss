@@ -1,5 +1,6 @@
 /* Write your global styles here, in PostCSS syntax */
 @import 'open-props/normalize.min.css';
+@import 'open-props/buttons.min.css';
 
 html {
 
@@ -7,6 +8,8 @@ html {
 
 	/* light colors */
 	--brand-light: var(--indigo-10);
+	--brand-light-hover: var(--indigo-8);
+	--brand-light-active: var(--indigo-11);
 
 	--text-1-light: var(--gray-8);
 	--text-2-light: var(--gray-7);
@@ -17,7 +20,9 @@ html {
 	--surface-4-light: var(--gray-3);
 
 	/* dark colors */
-	--brand-dark: var(--indigo-6);
+	--brand-dark: var(--indigo-10);
+	--brand-dark-hover: var(--indigo-8);
+	--brand-dark-active: var(--indigo-11);
 
 	--text-1-dark: var(--gray-3);
 	--text-2-dark: var(--gray-5);
@@ -30,6 +35,8 @@ html {
 
 :root {
 	--brand: var(--brand-light);
+	--brand-hover: var(--brand-light-hover);
+	--brand-active: var(--brand-light-active);
 
 	--text-1: var(--text-1-light);
 	--text-2: var(--text-2-light);
@@ -43,6 +50,8 @@ html {
 @media (prefers-color-scheme: dark) {
 	:root {
 		--brand: var(--brand-dark);
+		--brand-hover: var(--brand-dark-hover);
+		--brand-active: var(--brand-dark-active);
 
 		--text-1: var(--text-1-dark);
 		--text-2: var(--text-2-dark);

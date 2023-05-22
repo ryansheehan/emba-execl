@@ -10,7 +10,7 @@ export const googleLogin: Action = async ({request, cookies, url}) => {
     // validate csrf
     if(gCsrfToken !== cookies.get('g_csrf_token')) {
         console.error('csrf tokens do not match');
-        throw redirect(303, '/'); // fix me, this is not a 300 error, this should be a different error
+        throw redirect(303, '/404'); // fix me, this is not a 300 error, this should be a different error
     }
 
     // validate ID token        

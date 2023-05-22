@@ -1,8 +1,11 @@
 <script lang="ts">	
     import type { PageData } from './$types';
+    import TodoForm from '$lib/components/todo-form.svelte';
+
     export let data: PageData;
 
     const {user} = data;
+
 </script>
 
 <div class="main-wrapper">
@@ -18,19 +21,33 @@
         <a href="/protected">Protected</a>
     </div>
 
-    <button class="shadow-hover">test</button>
+    <div class="card">
+        <TodoForm />
+    </div>
 </div>
 
 <style lang="postcss">
     .main-wrapper {
         /* background-color: var(--red-12); */
         block-size: 1200px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
     }
 
-    button {
-        margin-inline-start: var(--size-4);
+    .card {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: var(--size-2);
+        justify-content: flex-start;
+        inline-size: 300px;
         margin-block-start: var(--size-4);
+        padding: var(--size-2);
+
+        background-color: var(--surface-4);
+        min-block-size: var(--size-content-3);
     }
+
 </style>
 
 
