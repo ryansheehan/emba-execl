@@ -1,33 +1,18 @@
 import type { PageServerLoadEvent } from './$types';
-import {redirect, type Actions } from '@sveltejs/kit';
-import {todoActions} from '$lib/server/todos';
+// import type { Actions } from '@sveltejs/kit';
+import { requireAuth } from '$lib/server/auth/server-load';
 
-interface ResponseData {
-    user?: {
-        email: string;
-		name: string;
-		picture?: string | null;				
-    }
-}
 
-export const load = async ({locals}: PageServerLoadEvent): Promise<ResponseData> => {
+export const load = requireAuth(async ({locals}: PageServerLoadEvent) => {
     const {user: userProfile} = locals;
 
-    if (userProfile) {
-        const {email, givenName, picture} = userProfile;
-    
-        return {        
-            user: {email, name: givenName, picture}
-        };
-    } else {
-        // return {
-        //     user: undefined
-        // }
+    const {email, givenName, picture} = userProfile;
+   
+    return {        
+        user: {email, name: givenName, picture},   
+    };
+ });
 
-        throw redirect(303, 'auth/login');
-    }
- };
-
- export const actions: Actions = {
-    ...todoActions,
- }
+//  export const actions: Actions = {
+//     ...todoActions,
+//  }

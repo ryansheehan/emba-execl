@@ -21,7 +21,7 @@ model User {
   googleSub         String    @unique
   currentExecLogId  Int?
   todos             Todo[]
-  logs              ExecLog[]  @relation("ExecLogs")
+  logs              ExecLog[]
   quotesSeen        MotivationalQuoteSeen[]
 }
 
@@ -40,26 +40,25 @@ model Todo {
   id                Int       @id @default(autoincrement())
   createdAt         DateTime  @default(now()) @map(name: "created_at")
   updatedAt         DateTime  @updatedAt @map(name: "updated_at")
+  position          Int
   title             String
-  priority          Int
-  completed         DateTime?
-  topLogs           TopTodo[] @relation("TopTodos")
-  completedInLog    ExecLog?  @relation("TodosCompletedInLog", fields: [completedInLogId], references: [id])
-  completedInLogId  Int?
+  deleted           Boolean   @default(false)
+  completedIn       ExecLog?  @relation(fields: [completedInId], references: [id])
+  completedInId     Int   
   user              User      @relation(fields: [userId], references: [id])
-  userId            String
+  userId            String    
+
+  @@index([userId])
 }
 
 model ExecLog {
   id                Int       @id @default(autoincrement())
   createdAt         DateTime  @default(now()) @map(name: "created_at")
   updatedAt         DateTime  @updatedAt @map(name: "updated_at")
-  period            Int       
-  startDate         DateTime
-  endDate           DateTime?
-  showUp            String
-  speakUp           String
-  syncUp            String
+  closed            DateTime?
+  showUp            String?
+  speakUp           String?
+  syncUp            String?
   lessonsLearned    String?
   progressMade      String?
   progressNeeded    String?
@@ -68,19 +67,11 @@ model ExecLog {
   personalScore     Int?
   professionalScore Int?
   organizationScore Int?
-  topTodos          TopTodo[] @relation("TopTodos")
-  completedTodos    Todo[]    @relation("TodosCompletedInLog")
-  user              User      @relation("ExecLogs", fields: [userId], references: [id])
+  completedTodos    Todo[]
+  user              User      @relation(fields: [userId], references: [id])
   userId            String
-}
 
-model TopTodo {  
-  todoId            Int
-  execLogId         Int
-  todo              Todo      @relation("TopTodos", fields: [todoId], references: [id])
-  execLog           ExecLog   @relation("TopTodos", fields: [execLogId], references: [id])
-
-  @@id([todoId, execLogId])
+  @@index([userId, createdAt(sort: Desc)])
 }
 
 model MotivationalQuote {
