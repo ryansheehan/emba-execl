@@ -11,9 +11,7 @@
 		"strict": true,
 		"paths": {
 			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"],
-			"$store": ["./src/store"],
-			"$store/*": ["./src/store/*"]
+			"$lib/*": ["./src/lib/*"]
 		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
