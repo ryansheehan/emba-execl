@@ -1,23 +1,24 @@
 import type {PageServerLoadEvent} from './$types';
-import {redirect} from '@sveltejs/kit';
 import {handleCallback} from '$lib/server/auth/google/callback';
+import type {Profile} from '$lib/models';
 
+export const ssr=false;
 
 export const load = async (event: PageServerLoadEvent) => {
+    let profile: Profile | null = null;
+
     try {
-        await handleCallback(event);
+        profile = await handleCallback(event);
     } catch (error) {
         console.error(error);
-    }
+    }    
 
     const {url} = event;
     const redirectTo64 = url.searchParams.get('state');    
+    let redirectTo = '/journal';
     if (redirectTo64) {
-        const redirectTo = Buffer.from(redirectTo64, 'base64').toString('utf8');        
-        if (redirectTo) {
-            throw redirect(303, redirectTo);
-        }
+        redirectTo = Buffer.from(redirectTo64, 'base64').toString('utf8');        
     }
-    
-    throw redirect(303, '/journal');
+
+    return {redirectTo, profile};
 }

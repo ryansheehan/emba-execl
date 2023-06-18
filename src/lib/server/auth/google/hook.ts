@@ -5,11 +5,11 @@ import { getProfile } from '$lib/server/prisma/get-profile';
 
 export const auth: Handle = async ({event, resolve}) => {
     const {cookies, locals} = event;
-    const idToken = cookies.get('token');
+    const idToken = cookies.get('token');    
     if (idToken) {
-        try {
+        try {            
             const {sub} = await parseToken(idToken);
-            if (sub) {
+            if (sub) {                
                 const user = await getProfile({sub});
                 if (!user) {
                     throw new Error('User profile not found.')
@@ -18,7 +18,7 @@ export const auth: Handle = async ({event, resolve}) => {
                 }
                 
             }
-        } catch (error) {                                    
+        } catch (error) {                                                      
             handleLogout(event);
         }
     }

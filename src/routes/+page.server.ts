@@ -7,4 +7,8 @@ export const load: PageServerLoad = async ({locals}) => {
     if(user) {
         throw redirect(303, '/journal');
     }
+
+    return {
+        profile: user,
+    }
 }
