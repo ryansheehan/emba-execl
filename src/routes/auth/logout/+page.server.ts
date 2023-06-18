@@ -1,6 +1,7 @@
 import type {PageServerLoadEvent} from './$types';
 
 import {handleLogout} from '$lib/server/auth/logout';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({parent, cookies}:PageServerLoadEvent) {
     handleLogout({cookies});
@@ -8,5 +9,5 @@ export async function load({parent, cookies}:PageServerLoadEvent) {
     const data = {
         ...site,        
     }
-    return data;
+    throw redirect(302, '/');    
 }
