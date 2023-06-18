@@ -4,7 +4,7 @@ import type { PageServerLoadEvent } from './$types';
 
 export async function load({locals}: PageServerLoadEvent) {    
     if (locals?.user?.id) {        
-        throw redirect (303, '/journal');
+        throw redirect (303, '/');
     }
 
     return { };

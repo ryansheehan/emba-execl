@@ -1,1 +1,0 @@
-<p>review a specific journal entry</p>

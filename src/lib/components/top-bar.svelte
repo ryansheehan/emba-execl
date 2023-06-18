@@ -1,8 +1,5 @@
 <script lang="ts">    
     import {scrollWatcher} from '$lib/use/scroll-watcher';
-	import type { Profile } from '$lib/models';
-
-    export let user: Profile | null | undefined;
 
     let sticking = false;
 
@@ -13,9 +10,6 @@
 
 <header class:sticking={sticking} use:scrollWatcher={{callback: stickingCallback, margin: '16px 0px 0px 0px'}}>
     <h1>Executive Leadership Journal</h1>
-    {#if user}
-        <a href="/auth/logout">Logout</a>
-    {/if}
 </header>
 
 <style lang="postcss">
@@ -56,10 +50,6 @@
 
     h1 {
         max-inline-size: none;
-        flex: 1;
-    }
-
-    a {
-        flex: 0;
+        
     }
 </style>

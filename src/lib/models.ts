@@ -1,1 +1,0 @@
-export type { User, Profile, Todo, ExecLog, MotivationalQuote } from '@prisma/client';

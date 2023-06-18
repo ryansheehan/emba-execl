@@ -2,10 +2,6 @@
     import '../app.postcss'
     import {dev} from '$app/environment';
     import TopBar from '$lib/components/top-bar.svelte';
-	import type { PageData } from './$types';
-
-    export let data: PageData;
-    const user = data.user;
 </script>
 
 <svelte:head>
@@ -15,7 +11,7 @@
 </svelte:head>
 
 <div class="root">
-    <TopBar {user}/>
+    <TopBar />
     <div class="root-content">
         <slot/>
     </div>

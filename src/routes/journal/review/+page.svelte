@@ -1,1 +1,0 @@
-<p>Review past logs</p>

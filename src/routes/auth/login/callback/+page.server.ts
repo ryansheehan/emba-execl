@@ -19,5 +19,5 @@ export const load = async (event: PageServerLoadEvent) => {
         }
     }
     
-    throw redirect(303, '/journal');
+    throw redirect(303, '/');
 }
