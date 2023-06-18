@@ -1,18 +1,10 @@
-import type { PageServerLoadEvent } from './$types';
-// import type { Actions } from '@sveltejs/kit';
-import { requireAuth } from '$lib/server/auth/server-load';
+import { redirect } from '@sveltejs/kit';
+import type {PageServerLoad} from './$types';
 
+export const load: PageServerLoad = async ({locals}) => {
+    const user = locals?.user;
 
-export const load = requireAuth(async ({locals}: PageServerLoadEvent) => {
-    const {user: userProfile} = locals;
-
-    const {email, givenName, picture} = userProfile;
-   
-    return {        
-        user: {email, name: givenName, picture},   
-    };
- });
-
-//  export const actions: Actions = {
-//     ...todoActions,
-//  }
+    if(user) {
+        throw redirect(303, '/journal');
+    }
+}
