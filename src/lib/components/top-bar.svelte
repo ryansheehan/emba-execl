@@ -1,6 +1,7 @@
 <script lang="ts">    
-    import {scrollWatcher} from '$lib/use/scroll-watcher';
-
+    import {scrollWatcher} from '$lib/use/scroll-watcher';	
+    import {user} from '$lib/stores/user.store';
+   
     let sticking = false;
 
     const stickingCallback = (isOffScreen: boolean) => { 
@@ -10,6 +11,9 @@
 
 <header class:sticking={sticking} use:scrollWatcher={{callback: stickingCallback, margin: '16px 0px 0px 0px'}}>
     <h1>Executive Leadership Journal</h1>
+    {#if $user}
+        <a href="/auth/logout" data-sveltekit-preload-data="tap">Logout</a>
+    {/if}
 </header>
 
 <style lang="postcss">
@@ -24,6 +28,8 @@
         justify-content: center;
         align-items: center;
 
+        isolation:isolate;
+
         transition: background-color 200ms
     }
 
@@ -36,7 +42,8 @@
         bottom: 0;
         opacity: 0;
         box-shadow: var(--shadow-2);               
-        transition: opacity 300ms ease; 
+        transition: opacity 300ms ease;
+        z-index: -1;     
     }
 
     header.sticking {

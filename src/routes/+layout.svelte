@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div class="root">
-    <TopBar />
+    <TopBar/>
     <div class="root-content">
         <slot/>
     </div>

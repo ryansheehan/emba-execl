@@ -3,16 +3,11 @@ import type { PageServerLoadEvent } from './$types';
 import { requireAuth } from '$lib/server/auth/server-load';
 
 
-export const load = requireAuth(async ({locals}: PageServerLoadEvent) => {
-    const {user: userProfile} = locals;
+    if(user) {
+        throw redirect(303, '/journal');
+    }
 
-    const {email, givenName, picture} = userProfile;
-   
-    return {        
-        user: {email, name: givenName, picture},   
-    };
- });
-
-//  export const actions: Actions = {
-//     ...todoActions,
-//  }
+    return {
+        profile: user,
+    }
+}

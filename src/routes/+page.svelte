@@ -1,11 +1,4 @@
 <script lang="ts">	
-    import type { PageData } from './$types';
-    import TodoForm from '$lib/components/todo-form.svelte';
-
-    export let data: PageData;
-
-    const {user} = data;
-
 </script>
 
 <div class="main-wrapper">

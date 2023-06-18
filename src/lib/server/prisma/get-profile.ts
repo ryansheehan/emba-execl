@@ -1,4 +1,4 @@
-import { prisma, type Profile } from './client';
+import { prisma } from './client';
 
 export async function getProfile({sub}: {sub: string}) {
     try {
