@@ -72,16 +72,17 @@ model ExecLog {
 }
 
 model MotivationalQuote {
-  id        Int                     @id @default(autoincrement())
-  quote     String
-  usersSeen MotivationalQuoteSeen[]
+  id                Int               @id @default(autoincrement())
+  quote             String
+  attribution       String
+  usersSeen         MotivationalQuoteSeen[]
 }
 
 model MotivationalQuoteSeen {
-  quoteId Int
-  userId  String
-  quote   MotivationalQuote @relation(fields: [quoteId], references: [id])
-  user    User              @relation(fields: [userId], references: [id])
+  quoteId           Int
+  userId            String
+  quote             MotivationalQuote @relation(fields: [quoteId], references: [id])
+  user              User              @relation(fields: [userId], references: [id])
 
   @@id([quoteId, userId])
 }
