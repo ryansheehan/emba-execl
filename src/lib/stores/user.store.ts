@@ -1,8 +1,9 @@
-import {writable, get} from 'svelte/store';
+import {derived, writable} from 'svelte/store';
 import type {Profile} from '$lib/models';
 
-const foo = writable(0);
 const {subscribe, set} = writable<Profile|null>(null);
+
+export const userId = derived({subscribe}, $p => $p?.userId);
 
 export const user = {
     subscribe,

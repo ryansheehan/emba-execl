@@ -4,7 +4,8 @@
 
 <form method="POST" use:enhance action="?/addTodo">
     <div>
-        <input name="title" />
+        <!-- svelte-ignore a11y-autofocus -->
+        <input name="title" autofocus />
         <button type="submit">I Got This!</button>
     </div>
 </form>
