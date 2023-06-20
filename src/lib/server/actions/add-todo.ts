@@ -1,5 +1,6 @@
 import {requireAuth} from '$lib/server/auth/action';
 import {error} from '@sveltejs/kit';
+import {tryCreateTodo} from '$lib/server/prisma/create-todo';
 
 export const addTodo = requireAuth(async ({request, locals}) => {
     const {userId} = locals.user;
@@ -12,9 +13,9 @@ export const addTodo = requireAuth(async ({request, locals}) => {
         throw error(400, {message: 'title required'}); 
     }
 
-    const position = -1;
+    const position = 0;
 
-    const todo = {userId, position, title};    
+    const todo = await tryCreateTodo({userId, position, title});
 
     return {todo: todo};
 });

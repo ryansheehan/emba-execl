@@ -13,8 +13,10 @@ export async function getActiveTodos(userId: string) {
             orderBy: {
                 position: 'desc'
             }
-        }) 
-    } catch (error) {
+        });
 
+        return todos;
+    } catch (error) {
+        console.error(error);
     }
 }

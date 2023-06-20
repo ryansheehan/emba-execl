@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageServerData, ActionData } from "./$types";
     import TodoForm from '$lib/components/todo-form.svelte';
+    import {todos} from '$lib/stores/todo.store';
 
     export let data: PageServerData;
     export let form: ActionData;
@@ -9,7 +10,7 @@
 
     $: {
         if (form?.todo) {
-            console.log('addTodo', form.todo.title);
+            todos.addTodo(form?.todo);
         }
     }
 </script>

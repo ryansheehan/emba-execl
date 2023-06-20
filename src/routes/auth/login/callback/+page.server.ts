@@ -1,14 +1,18 @@
 import type {PageServerLoadEvent} from './$types';
 import {handleCallback} from '$lib/server/auth/google/callback';
-import type {Profile} from '$lib/models';
+import {getActiveTodos} from '$lib/server/prisma/get-todos';
+import type {Profile, Todos} from '$lib/models';
 
 export const ssr=false;
 
 export const load = async (event: PageServerLoadEvent) => {
     let profile: Profile | null = null;
-
+    let todos: Todos = [];
     try {
         profile = await handleCallback(event);
+        if (profile) {
+            todos = await getActiveTodos(profile.userId) ?? [];
+        }
     } catch (error) {
         console.error(error);
     }    
@@ -20,5 +24,5 @@ export const load = async (event: PageServerLoadEvent) => {
         redirectTo = Buffer.from(redirectTo64, 'base64').toString('utf8');        
     }
 
-    return {redirectTo, profile};
+    return {redirectTo, profile, todos};
 }

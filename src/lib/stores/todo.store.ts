@@ -1,7 +1,5 @@
-import {writable, derived, get} from 'svelte/store';
-import type { NewTodo, Todos } from '$lib/models';
-import { tryCreateTodo } from '$lib/server/prisma/create-todo';
-import {userId as userIdStore} from './user.store';
+import {writable, derived, } from 'svelte/store';
+import type { Todo, Todos } from '$lib/models';
 
 const {subscribe, set, update} = writable<Todos>([]);
 
@@ -10,20 +8,15 @@ export const todoCount = derived({subscribe}, $a => $a.length);
 export const todos = {
     subscribe,
 
-    async addTodo(newTodo: NewTodo) {
-        const todo = await tryCreateTodo(newTodo);
-
+    async addTodo(newTodo: Todo) {
         update(todos => {        
-            const lastIndex = todos.findLastIndex(t => t.position < todo.position);
-            const insertedTodos =[...todos.slice(0, lastIndex), todo, ...todos.splice(lastIndex+1, todos.length)];
+            const lastIndex = todos.findLastIndex(t => t.position < newTodo.position);
+            const insertedTodos = lastIndex === -1 ? [newTodo, ...todos] : [...todos.slice(0, lastIndex), newTodo, ...todos.splice(lastIndex+1, todos.length)];
             return insertedTodos;
         });
     },
 
-    async refresh() {        
-        const userId = get(userIdStore);
-        if (userId) {
-            
-        }
+    async refreshActive(todos: Todos) { 
+        set(todos);
     },
 }
